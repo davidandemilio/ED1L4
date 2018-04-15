@@ -1,5 +1,6 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using EDL4.App_Start;
 
 [assembly: OwinStartupAttribute(typeof(EDL4.Startup))]
 namespace EDL4

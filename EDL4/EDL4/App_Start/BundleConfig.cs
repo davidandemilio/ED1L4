@@ -1,7 +1,8 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace EDL4
+
+namespace EDL4.App_Start
 {
     public class BundleConfig
     {

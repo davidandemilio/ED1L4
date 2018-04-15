@@ -21,26 +21,27 @@
     </dl>
 </div>
 <h3>cambios</h3>
-<table>
+
     @if (Model.cambios != null)
 {
     foreach (var item in Model.cambios)
     {
         <tr>
           
-                @Html.DisplayFor(modelItem => item) |@Html.ActionLink("Delete", "Deleteca", new { id = item })
+                @Html.DisplayFor(modelItem => item) |@Html.ActionLink("Delete", "Deleteca", new { id = item, pais = Model.nombre })
+            
 
                 
           
         </tr>
+        <br>
 
+        }
 
     }
 
-}
-</table>
 <h3>coleccionadas</h3>
-<table>
+
     @if (Model.coleccionadas != null)
     {
         foreach (var item in Model.coleccionadas)
@@ -50,29 +51,29 @@
                 @Html.DisplayFor(modelItem => item)
 
             </tr>
-
+            <br>
 
         }
 
     }
-</table>
+
 <h3>faltantes</h3>
-<table>
+
     @if (Model.faltantes != null)
     {
         foreach (var item in Model.faltantes)
         {
             <tr>
 
-                @Html.DisplayFor(modelItem => item) |@Html.ActionLink("Delete", "Deletefa", new {id=item}) 
+                @Html.DisplayFor(modelItem => item) |@Html.ActionLink("Delete", "Deletefa", new {id=item, pais = Model.nombre }) 
 
             </tr>
-
+            <br>
 
         }
 
     }
-</table>
+
 
 <p>
    

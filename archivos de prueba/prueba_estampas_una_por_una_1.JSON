@@ -1,0 +1,23 @@
+{
+  "Estampa1": {
+    "pais_no": "argentina_23",
+    "se_tiene": true
+    
+  },
+  "Estampa2": {
+     "pais_no": "brasil_563",
+    "se_tiene": false
+  },
+  "Estampa3": {
+     "pais_no": "Mexico_20",
+    "se_tiene": true
+  },
+  "Estampa4": {
+      "pais_no": "Espania_63",
+    "se_tiene": false
+  },
+  "Estampa5": {
+     "pais_no": "Mexico_36",
+    "se_tiene": true
+  }
+}

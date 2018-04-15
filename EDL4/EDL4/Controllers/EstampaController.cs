@@ -11,46 +11,29 @@ using EDL4.DBContest;
 using EDL4.Models;
 namespace EDL4.Controllers
 {
-    public class PaisController : Controller
+
+    public class EstampaController : Controller
     {
         DefaultConnection db = DefaultConnection.getInstance;
-        // GET: Pais
+        // GET: Estampa
         public ActionResult Index()
         {
-            return View(db.DiccionarioListados.Values.ToList());
+            return View(db.estampasdirectas.Values.ToList());
         }
 
-        // GET: Pais/Details/5
-        public ActionResult Details(string id)
+        // GET: Estampa/Details/5
+        public ActionResult Details(int id)
         {
-            Pais pais = db.DiccionarioListados[id];
-           
-            return View(pais);
+            return View();
         }
 
-
-        // GET: Pais/Create
+        // GET: Estampa/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pais/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
+        // POST: Estampa/Create
         [HttpPost]
         public ActionResult carga(HttpPostedFileBase postedFile)
         {
@@ -77,8 +60,8 @@ namespace EDL4.Controllers
                 string csvData = System.IO.File.ReadAllText(filepath);
 
 
-               
-             
+       
+
                 try
                 {
                     JObject json = JObject.Parse(csvData);
@@ -87,10 +70,14 @@ namespace EDL4.Controllers
                     {
 
                         string x = property.Value.ToString();
-                        Pais y = JsonConvert.DeserializeObject<Pais>(x);
-                        db.DiccionarioListados.Add(y.nombre, y);
+                        Estampa y = JsonConvert.DeserializeObject<Estampa>(x);
+
+                        db.estampasdirectas.Add(y.pais_no, y);
+
+
+
                     }
-                    
+
 
 
                     ViewBag.Message = "Cargado Exitosamente";
@@ -106,47 +93,55 @@ namespace EDL4.Controllers
 
             return RedirectToAction("Index");
         }
-        // GET: Pais/Edit/5
-        public ActionResult Edit(int id)
+
+        // GET: Estampa/Edit/5
+        public ActionResult Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Estampa estampabuscada = db.estampasdirectas[id];
+
+            if (estampabuscada == null)
+            {
+
+                return HttpNotFound();
+            }
+            return View(estampabuscada);
         }
 
-        // POST: Pais/Edit/5
+        // POST: Estampa/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "pais_no,se_tiene")]Estampa estampa)
         {
             try
             {
                 // TODO: Add update logic here
+                Estampa estampabuscada = db.estampasdirectas[estampa.pais_no];
+                if (estampabuscada == null)
+                {
+                    return HttpNotFound();
+                }
+                estampabuscada.pais_no = estampa.pais_no;
+                estampabuscada.se_tiene = estampa.se_tiene;
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
 
-
-        public ActionResult Deletefa(int id,string pais)
-        {
-            db.DiccionarioListados[pais].faltantes.Remove(id);
-            return RedirectToAction("Details", new { id = pais });
-        }
-
-        public ActionResult Deleteca(int id, string pais)
-        {
-            db.DiccionarioListados[pais].cambios.Remove(id);
-            return RedirectToAction("Details", new { id = pais });
-        }
-        // GET: Pais/Delete/5
+        // GET: Estampa/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Pais/Delete/5
+        // POST: Estampa/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
@@ -163,3 +158,4 @@ namespace EDL4.Controllers
         }
     }
 }
+

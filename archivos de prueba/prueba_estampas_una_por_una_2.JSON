@@ -1,0 +1,23 @@
+{
+  "Estampa1": {
+    "pais_no": "marruecos_32",
+    "se_tiene": true
+    
+  },
+  "Estampa2": {
+     "pais_no": "especial_209",
+    "se_tiene": false
+  },
+  "Estampa3": {
+     "pais_no": "espcial_02",
+    "se_tiene": true
+  },
+  "Estampa4": {
+      "pais_no": "especial_98",
+    "se_tiene": false
+  },
+  "Estampa5": {
+     "pais_no": "Mexico_89",
+    "se_tiene": true
+  }
+}

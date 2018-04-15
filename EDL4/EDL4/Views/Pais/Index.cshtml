@@ -7,7 +7,14 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @using (Html.BeginForm("carga", "Pais", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <span>Seleccionar archivo:</span>
+        <input type="file" name="postedFile" />
+                    <br />
+                    <input type="submit" value="Cargar Archivo de paises" />
+
+    }
 </p>
 <table class="table">
     <tr>
@@ -24,7 +31,7 @@
         </td>
         <td>
           
-            @Html.ActionLink("Details", "Details", new { id=item.nombre }) |
+            @Html.ActionLink("Estampas para cambiar,coleccionadas y faltantes", "Details", new { id=item.nombre }) |
         
         </td>
     </tr>
